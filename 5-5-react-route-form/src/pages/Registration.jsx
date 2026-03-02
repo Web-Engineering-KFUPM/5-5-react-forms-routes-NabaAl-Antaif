@@ -8,26 +8,22 @@ export default function Registration() {
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
 
-  const nextErrors = {};
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    const nextErrors = {};
     // Email validation
     if (!email.trim()) nextErrors.email = "Email is required";
-    else if (!(email.includes("@") && email.endsWith(".com"))){
+    else if (!(email.includes("@") && email.endsWith(".com")))
       nextErrors.email = "Enter a valid email address"; 
-      errors.email && <p className="error">{errors.email}</p>}
     
     // Password validation
     if (!password.trim()){
       nextErrors.password = "Password is required";
-      {errors.password && <p className="error">{errors.password}</p>}
     }
 
     // Gender validation
     if (!gender){
       nextErrors.gender = "Please select your gender";
-      {errors.gender && <p className="error">{errors.gender}</p>}
     }
 
     setErrors(nextErrors);
@@ -55,9 +51,7 @@ export default function Registration() {
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? "email-error" : undefined}
           />
-          {errors.email && (
-            <p id="email-error" className="error">{errors.email}</p>
-          )}
+          {errors.email && (<p id="email-error" className="error">{errors.email}</p>)}
         </div>
         <div className="form-row">
           <label htmlFor="password">Password</label>
@@ -67,6 +61,7 @@ export default function Registration() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
           />
+          {errors.password && <p className="error">{errors.password}</p>}
         </div>
 
         <fieldset className="form-row">
@@ -90,11 +85,11 @@ export default function Registration() {
             onChange={(e) => setGender(e.target.value)}
           /> Female
         </label>
-      </fieldset>
-    </fieldset>
-
+        </fieldset>
+        {errors.gender && <p className="error">{errors.gender}</p>}
+        </fieldset>
         {/*Disable the submit button until all requirements met*/}
-        <button type="submit" disabled={!email || !password || !gender}>Register</button>
+        <button type="submit">Register</button>
       </form>
 
       <div className="card info">
